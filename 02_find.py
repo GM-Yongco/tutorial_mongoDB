@@ -37,16 +37,16 @@ if __name__ == '__main__':
 	cluster:MongoClient = MongoClient(driver_connection)
 	db: database.Database = cluster["sample_analytics"]
 	coll: collection.Collection = db["accounts"]
-	result:cursor.Cursor = coll.find()
+	
+	# how to query
 
-	for x in result :
+	query:json = {"limit":9000}
+	selection:json = { "limit": 1}
+	result:cursor.Cursor = coll.find(query, selection)
+
+	separator("RESULTS")
+
+	for x in result:
 		print(x)
-
-	separator("TYPES")
-
-	print(type(cluster))
-	print(type(db))
-	print(type(coll))
-	print(type(result))
 
 	separator("END")
