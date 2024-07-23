@@ -1,7 +1,9 @@
 # Author			: G.M. Yongco #BeSomeoneWhoCanStandByShinomiya
 # Date				: ur my date uwu
 # Description		: Code that will impress u ;)
+# Real Description	: template as to not repeat code for the tutorials
 # HEADERS ================================================================
+
 import json
 
 from pymongo import MongoClient, database, collection, cursor
@@ -22,31 +24,16 @@ def get_credentials()->json:
 	file_path:str = "REFERENCES/auth.json"
 	return json.load(open(file_path))
 
-# ========================================================================
-# MAIN 
-# ========================================================================
+# see how this works in tutorial 01
+def get_collection(
+		database_name:str, 
+		collection_name:str, 
+		driver_connection:str = "") -> collection.Collection:
 
-if __name__ == '__main__':
-	separator("START")
+	if driver_connection == "":
+		user_credentials:json = get_credentials()
+		driver_connection = f"mongodb+srv://{user_credentials['username']}:{user_credentials['password']}@cluster-01.f4zbhsn.mongodb.net/?retryWrites=true&w=majority&appName=cluster-01"
 
-	# connecting to the cluster, database, collection
-
-	user_credentials:json = get_credentials()
-	driver_connection:str = f"mongodb+srv://{user_credentials['username']}:{user_credentials['password']}@cluster-01.f4zbhsn.mongodb.net/?retryWrites=true&w=majority&appName=cluster-01"
-	
-	cluster:MongoClient = MongoClient(driver_connection)
-	db: database.Database = cluster["sample_analytics"]
-	coll: collection.Collection = db["accounts"]
-	result:cursor.Cursor = coll.find()
-
-	for x in result :
-		print(x)
-
-	separator("TYPES")
-
-	print(type(cluster))
-	print(type(db))
-	print(type(coll))
-	print(type(result))
-
-	separator("END")
+	cluster : MongoClient = MongoClient(host = driver_connection)
+	db : database.Database = cluster[database_name]
+	return db[collection_name]

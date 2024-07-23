@@ -2,25 +2,8 @@
 # Date				: ur my date uwu
 # Description		: Code that will impress u ;)
 # HEADERS ================================================================
-import json
 
-from pymongo import MongoClient, database, collection, cursor
-
-# ========================================================================
-# FUNCTIONS MISC
-# ========================================================================
-
-def separator(x:str = "SECTION") -> None:
-	section:str = f"\n {x} {'-' * (40 - len(x))}\n"
-	print(section)
-
-# ========================================================================
-# FUNCTIONS 
-# ========================================================================
-
-def get_credentials()->json:
-	file_path:str = "REFERENCES/auth.json"
-	return json.load(open(file_path))
+from mongoDB_template import *
 
 # ========================================================================
 # MAIN 
