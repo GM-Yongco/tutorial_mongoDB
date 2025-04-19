@@ -1,0 +1,9 @@
+==================================================
+ MAIN TEMPLATE
+==================================================
+
+Hierarchy
+	Database
+	Collection
+	Document
+	Fields
